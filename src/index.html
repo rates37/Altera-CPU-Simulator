@@ -1,0 +1,330 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CPU Sim</title>
+    <style>
+      .box {
+               display : flex;
+              flex-direction : row;
+               
+            }
+
+      .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+      .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+        font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+        font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tg .tg-ycr8{background-color:#ffffff;text-align:left;vertical-align:top}
+      .tg .tg-0lax{text-align:left;vertical-align:top}
+      .tg .tg-c6of{background-color:#ffffff;border-color:inherit;text-align:left;vertical-align:top}
+    </style>
+  </head>
+  <body>
+    <h1>Altera CPU Simulator</h1>
+      <div class="box">
+        <!-- Do not use 'format document' in vs code, it ruins the alignment of the text for some reason lol-->
+      <div id="diagram" style="vertical-align: top;">
+        <svg id="svg_canvas" viewBox="-110 -74.397 1115.955 917.563" height="917.563" style=" background-color: white; transform: scale(1);" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+          
+          <g id="everything" transform="scale(0.95)">
+            <g id="addsub" transform="matrix(1, 0, 0, 1, 173.593021, 0.000008)">
+              <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 595.191 198.392 L 646.763 198.392 L 657.188 213.76 L 669.28 198.392 L 719.186 198.392 L 698.52 247.99 L 615.857 247.99 L 595.191 198.392 Z"/>
+              <g id="AddSubOutputWire"><path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 3px;" d="M 658.199 247.796 L 658.345 297.588"/></g>
+              <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="622.808" y="232.146">AddSub</text>
+            </g>
+            <g id="controlUnit">
+            <rect x="322.402" width="421.583" height="148.794" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" y="570.377"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.838577, 0, 0, 0.820623, 470.167674, 640.132582)">Control Unit</text>
+          </g>
+            
+            <g id="counter" transform="matrix(1, 0, 0, 1, 272.789007, 24.798958)">
+              <rect x="124.01" y="719.171" width="99.196" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+              <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.590071, 0, 0, 0.590069, 144.135834, 749.729187)">Counter</text>
+              <path d="M 37.213 148.794 L 49.613 173.593 L 24.814 173.593 L 37.213 148.794 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 297.602966, 719.156006)" bx:shape="triangle 24.814 148.794 24.799 24.799 0.5 0 1@f71e15f1"/>
+            </g>
+            <g id="counterWire"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 446.246 719.171 L 446.397 743.97"/></g>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 438.4 738.183 L 453.449 724.291"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 456.914438, 737.570511)">2</text>
+            <g id="clearWire"><path id="clearwire" style="fill: none; stroke: rgb(0, 0, 0);" d="M 397.045 757.189 L 372 757.148 L 372 719.171" /></g>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 322.401984, 750.534074)">Clear</text>
+            <g id="mux">
+              <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 297.603 323.148 L 471.196 322.387 L 442.274 371.985 L 326.587 371.985 L 297.603 323.148 Z"/>
+              <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="337.932" y="353.045">Multiplexer</text>
+            </g>
+            <g id="registers">
+              <g id="Ain"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 669.588 570.377 L 669.588 136.619 L 768.784 137.013" id="aInWire"/></g>
+              <g id="Gin"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 719.186 570.377 L 719.186 311.071 L 807.565 311.071" id="gInWire"/></g>
+              <g id="gOutWireGroup"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 396.799 570.377 L 396.799 471.181 L 198.407 471.181 L 198.407 347.186 L 312.117 347.186" id="gOutWire"/></g>
+              <g id="DINoutWireGroup"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 421.598 570.377 L 421.598 446.382 L 223.206 446.382 L 223.206 359.479 L 319.035 359.393" id="dinOutWire"/></g>
+              <g id="IRin"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 347.201 570.377 L 347.201 520.779 L 49.613 520.779 L 49.613 557.369 L 74.412 557.369" id="irInWire"/></g>
+              <g id="IR" transform="matrix(1, 0, 0, 1, 0.00001, 396.783997)">
+                <rect x="74.412" y="148.794" width="74.397" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 148.794 L 49.613 173.593 L 24.814 173.593 L 37.213 148.794 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 248.005005, 148.779007)" bx:shape="triangle 24.814 148.794 24.799 24.799 0.5 0 1@f71e15f1"/>
+                <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px; stroke-width: 2px; white-space: pre;" x="101.681" y="180.075">IR</text>
+              </g>
+              <g id="R0" transform="matrix(1, 0, 0, 1, -49.597664, -123.99498)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140656, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="87.172" y="179.797">R0</text>
+              </g>
+              <g id="R1" transform="matrix(1, 0, 0, 1, 24.799337, -123.994995)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.14064, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="87.172" y="179.463">R1</text>
+              </g>
+              <g id="R2" transform="matrix(1, 0, 0, 1, 99.196663, -123.994987)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140656, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="86.837" y="179.463">R2</text>
+              </g>
+              <g id="R3" transform="matrix(1, 0, 0, 1, 173.593323, -123.995003)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140701, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="87.211" y="179.797">R3</text>
+              </g>
+              <g id="R4" transform="matrix(1, 0, 0, 1, 247.990326, -123.994995)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140625, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="86.211" y="179.797">R4</text>
+              </g>
+              <g id="R5" transform="matrix(1, 0, 0, 1, 322.387299, -123.994987)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140686, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="87.211" y="179.797">R5</text>
+              </g>
+              <g id="R6" transform="matrix(1, 0, 0, 1, 396.784637, -123.994995)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140656, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="86.169" y="179.797">R6</text>
+              </g>
+              <g id="R7" transform="matrix(1, 0, 0, 1, 471.18161, -123.99501)" style="">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140656, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="87.172" y="180.131">R7</text>
+              </g>
+              <g id="RG" transform="matrix(1, 0, 0, 1, 732.577637, 149.195999)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140686, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="91.031" y="179.797">G</text>
+              </g>
+              <g id="RA" transform="matrix(1, 0, 0, 1, 694.372314, -24.799006)">
+                <rect x="74.412" y="148.794" width="49.598" height="49.598" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
+                <path d="M 37.213 99.196 L 49.613 115.729 L 24.814 115.729 L 37.213 99.196 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" transform="matrix(0, 1, -1, 0, 190.140686, 148.779007)" bx:shape="triangle 24.814 99.196 24.799 16.533 0.5 0 1@ef2b457f"/>
+                <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="92.29" y="179.797">A</text>
+              </g>
+            </g>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="933.743" y="414.439">Bus</text>
+            <g id="muxinputs">
+              <g id="GRegOutput"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 446.378 322.19 L 446.408 297.588 L 495.995 297.588 L 495.995 371.985 L 831.725 372.012 L 831.576 347.186"/></g>
+              
+              <g id="R7output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 570.345 74.067 L 570.392 272.894 L 434.075 272.789 L 434.399 323.273"/></g>
+              <g id="R6output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 496.241 74.49 L 495.995 247.99 L 421.489 247.757 L 421.598 322.638"/></g>
+              <g id="R5output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 421.598 74.397 L 421.598 223.191 L 409.31 223.191 L 409.493 322.871"/></g>
+              <g id="R4output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 347.201 74.397 L 347.201 173.593 L 396.799 173.593 C 396.799 173.593 396.913 322.8 396.85 322.8"/></g>
+              <g id="R3output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 272.83 74.374 C 272.83 74.374 272.804 198.406 272.804 198.392 C 272.804 198.378 384.296 198.392 384.317 198.392 C 384.338 198.392 384.469 322.75 384.469 322.75"/></g>
+              <g id="R2output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 198.427 74.397 C 198.427 74.397 198.407 223.205 198.407 223.191 C 198.407 223.177 371.979 223.191 372 223.191 C 372.021 223.191 372 322.387 372 322.387"/></g>
+              <g id="R1output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 124.03 74.397 C 124.03 74.397 124.01 248.004 124.01 247.99 C 124.01 247.976 361.668 247.99 361.689 247.99 C 361.71 247.99 360.986 322.387 360.986 322.387"/></g>
+              <g id="R0output"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 49.633 74.397 C 49.633 74.397 49.613 272.803 49.613 272.789 C 49.613 272.775 347.18 272.789 347.201 272.789 C 347.222 272.789 347.201 322.387 347.201 322.387"/></g>
+              <g id="dinWire" ><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px;" d="M 335.09 323.032 L 334.941 297.588 L -99.181 297.588"/> </g>
+            </g>
+            <g id="buswires">
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 384.307 371.947 L 384.393 421.583 L 967.176 421.583"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 918.353 420.546 L 917.578 -24.799 L 49.613 -24.799 L 49.613 24.799"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 124.01 24.799 C 124.01 24.799 124.646 -25.435 124.01 -24.799"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 198.407 24.805 C 198.407 24.805 199.043 -25.429 198.407 -24.793"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 272.521 24.793 C 272.521 24.793 273.157 -25.441 272.521 -24.805"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 346.918 24.799 C 346.918 24.799 347.554 -25.435 346.918 -24.799"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 421.598 24.799 C 421.598 24.799 422.234 -25.435 421.598 -24.799"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 495.712 24.787 C 495.712 24.787 496.348 -25.447 495.712 -24.811"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 570.392 24.799 C 570.392 24.799 571.028 -25.435 570.392 -24.799"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 793.469 -24.828 L 793.583 124.281"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 4px;" d="M 867.98 -24.799 L 867.98 198.392"/>
+            </g>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 372 409.676 L 396.799 384.877"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 399.784066, 401.778024)">16</text>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="-107.791" y="290.153">DIN</text>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 12.124 311.428 L 36.923 286.629"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 17.744717, 278.506903)">16</text>
+            <g id="upperDIN"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 112.115 545.219 L 112.835 297.588" /></g>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 99.211 461.188 L 124.01 436.389"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 89.709429, 452.259592)">9</text>
+            <g id="IRoutput"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 111.689 595.313 L 111.689 644.774 L 322.402 644.774"/></g>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 99.211 631.323 L 124.01 606.524"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 89.709429, 622.394789)">9</text>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="-108.652" y="91.761">Clock</text>
+            <g id="clockwires">
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M -99.181 99.196 L 595.191 99.196 L 594.904 334.943 L 807.089 334.943"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 768.784 161.038 L 595.191 161.188"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 545.571 61.434 L 533.448 61.265 L 533.5 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 471.196 61.434 L 459.073 61.265 L 459.125 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 396.799 61.434 L 384.676 61.265 L 384.728 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 322.424 61.434 L 310.301 61.265 L 310.353 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 248.005 61.434 L 235.882 61.265 L 235.934 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 173.63 61.434 L 161.507 61.265 L 161.559 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 99.233 61.434 L 87.11 61.265 L 87.162 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 24.858 61.434 L 12.735 61.265 L 12.787 99.196"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M -49.556 99.203 L -49.583 781.735 L 397.005 781.167"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px;" d="M 74.314 581.977 L -49.583 581.993"/>
+            </g>
+            <g id="routWire"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px;" d="M 372 570.377 L 372 495.98 L 173.608 495.98 L 173.608 334.213 L 304.366 333.708" id="Rout"/></g>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 162.404 460.328 L 187.203 435.529"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 152.901767, 451.399424)">8</text>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 180.001728, 486.776439)"><tspan>R0</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">out</tspan><tspan> ... R7</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">out</tspan></text>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 201.58141, 467.714548)"><tspan>G</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">out</tspan></text>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 227.140004, 437.024484)"><tspan>DIN</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">out</tspan></text>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 49.613, 517.057567)"><tspan>IR</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+            <g id="wirenodes">
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="595.139" cy="161.159" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="533.455" cy="99.271" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="459.08" cy="99.137" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="384.743" cy="99.432" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="310.368" cy="99.298" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="235.896" cy="99.419" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="161.521" cy="99.285" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="87.184" cy="99.58" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="12.809" cy="99.446" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="-49.687" cy="99.277" rx="1.986" ry="1.986"/>
+              <ellipse style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="-49.441" cy="582.107" rx="1.986" ry="1.986"/>
+            </g>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 719.185989, 304.902198)"><tspan>G</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+            <g id="AddSub"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 694.387 570.377 L 694.387 223.343 L 779.4 223.191" id="addsubWire"/></g>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 694.387039, 219.65125)">AddSub</text>
+            <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 699.225662, 130.719714)"><tspan>A</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+            <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 482.454 355.79 L 507.253 330.991"/>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 510.237682, 347.891945)">16</text>
+            <g id="RinGroup">
+              <path style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 3px;" d="M 644.789 570.377 L 644.789 -74.397 L 13.255 -74.397" id="Rin"/>
+              <path style="fill: none; stroke: rgb(0, 0, 0);" d="M 632.827 532.713 L 657.626 507.914"/>
+              <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px;" transform="matrix(0.610218, 0, 0, 0.610215, 623.324524, 523.78479)">8</text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 28px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 556.440552, 496.329712)"><tspan>R0</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan><tspan> ... R7</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <g id="R0in"><path id="R0inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 25.055 38.051 L 13.168 37.759 L 13.168 -74.82"/></g>
+              <g id="R1in"><path id="R1inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 99.211 38.474 L 87.33 38.182 L 87.33 -74.397"/></g>
+              <g id="R2in"><path id="R2inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 173.608 38.474 L 161.727 38.182 L 161.727 -74.397"/></g>
+              <g id="R3in"><path id="R3inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 248.005 38.474 L 236.124 38.182 L 236.124 -74.397"/></g>
+              <g id="R4in"><path id="R4inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 322.402 38.474 L 310.521 38.182 L 310.521 -74.397"/></g>
+              <g id="R5in"><path id="R5inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 396.799 38.474 L 384.918 38.182 L 384.918 -74.397"/></g>
+              <g id="R6in"><path id="R6inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 471.196 38.474 L 459.315 38.182 L 459.315 -74.397"/></g>
+              <g id="R7in"><path id="R7inPath" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 2px" d="M 545.593 38.474 L 533.712 38.182 L 533.712 -74.397"/></g>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, -24.782, -53.237877)"><tspan style="line-height: 44.5745px;">R0</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 49.615002, -53.237881)"><tspan style="line-height: 44.5745px;">R1</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 124.011993, -53.237877)"><tspan style="line-height: 44.5745px;">R2</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 198.408997, -53.237877)"><tspan style="line-height: 44.5745px;">R3</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 272.806, -53.237877)"><tspan style="line-height: 44.5745px;">R4</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 347.202972, -53.237877)"><tspan style="line-height: 44.5745px;">R5</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 421.600006, -53.237881)"><tspan style="line-height: 44.5745px;">R6</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+              <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 27.859px; line-height: 44.8px; white-space: pre;" transform="matrix(0.610218, 0, 0, 0.610215, 495.996979, -53.237881)"><tspan style="line-height: 44.5745px;">R7</tspan><tspan style="font-size: 18.0264px; line-height: 28.8423px;">in</tspan></text>
+            </g>
+            <g id="runWireGroup"><path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 322.402 669.573 C 322.402 669.573 -99.181 670.18 -99.181 669.573" id="runWire"/></g>
+            <g id="resetnWireGroup"><path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 322.402 694.372 L -99.181 694.372"  id="resetnWire"/></g>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="-109.968" y="662.138">Run</text>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="-111.043" y="715.225">Resetn</text>
+            <g id="doneWireG"><path style="fill: none; stroke: rgb(0, 0, 0);" d="M 669.588 719.171 L 669.588 768.769 L 967.176 768.769" id="doneWire"/></g>
+            <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 19.4px;" x="917.578" y="761.194">Done</text>
+            <g id="ARegOutput"><path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 3px;" d="M 793.583 198.392 L 793.583 173.593"/></g>
+        </g>
+      </svg>
+    </div>
+    <div id="controls + inputs">
+      Enter New Instruction: <input type="text" id="instruction_input"> <input type="button" value="🔘" id="instructionInputButton"><br>
+      Update DIN Value: <input type="text" id="DIN_input"> <input type="button" value="🔘" id="DINInputButton"><br>
+      <br><br>
+
+      Run: <input type="checkbox" id="runInput"> <br>
+      Resetn: <input type="checkbox" id="resetnInput"> <br>
+      Clock: <input type="button" value="pulse" id="clock"> <br>
+      Done: <text id="done_text">❌</text> 
+      <br><br>
+
+      <div class="box">
+        <div id="register contents table">
+      <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-0lax">Register</th>
+            <th class="tg-0lax">Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-ycr8">R0</td>
+            <td class="tg-c6of" id="R0_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R1</td>
+            <td class="tg-ycr8" id="R1_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R2</td>
+            <td class="tg-ycr8" id="R2_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R3</td>
+            <td class="tg-ycr8" id="R3_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R4</td>
+            <td class="tg-ycr8" id="R4_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R5</td>
+            <td class="tg-ycr8" id="R5_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R6</td>
+            <td class="tg-ycr8" id="R6_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">R7</td>
+            <td class="tg-ycr8" id="R7_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">A</td>
+            <td class="tg-ycr8" id="RA_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">G</td>
+            <td class="tg-ycr8" id="RG_value">00000000</td>
+          </tr>
+          <tr>
+            <td class="tg-ycr8">IR</td>
+            <td class="tg-ycr8" id="IR_value">00000000</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <div> <text>⠀⠀⠀⠀⠀</text></div>
+      <div id="hover tooltip" style="opacity: 100;">
+        <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 25px;">Instruction information:</text>
+        <br>
+        <text id="currentInstruction"  style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 20px;"></text>
+        <br>
+        <text id="clockCycle" style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 20px;"></text>
+        
+        <br><br><br>
+
+        <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 25px;">Mouseover information:</text>
+        <br>
+        <text id="hoverName" style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 20px;"></text>
+        <text id="hoverType" style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 20px;"></text>
+        <text id="hoverValue" style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 20px;"></text>
+      </div>
+      
+      </div>
+        <br><br>
+        Register Display Radix: <br><select id = "regRadixList">
+          <option> Decimal </option>
+          <option> Octal </option>
+          <option> Hexadecimal </option>
+          <option> Binary </option>
+          </select> <!-- Get value by: lst = document.getElementById("radixList"); lst.options[lst.selectedIndex].text-->
+          <br><br>
+          IR Display Radix: <br><select id = "irRegRadixList">
+            <option> Octal </option>
+            <option> Decimal </option>
+            <option> Hexadecimal </option>
+            <option> Binary </option>
+            </select>
+    </div>
+      </div>
+  </body>
+</html>
